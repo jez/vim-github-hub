@@ -5,9 +5,9 @@
 <img width="837" alt="screenshot 2016-06-10 00 37 07" src="https://cloud.githubusercontent.com/assets/5544532/15957334/4ed0c8b8-2ea3-11e6-8bbc-2d0aec88ad40.png">
 
 This plugin does filetype detection and syntax highlighting for buffers/files
-created by [github/hub][hub], the command line wrapper for working with GitHub
-from the command line. In particular, it does fancy things when you're using it
-to create new issues and pull requests.
+created by [github/hub][hub], a utility for working with Git + GitHub
+from the command line. In particular, this plugin does fancy things when you're
+using hub to create new issues and pull requests.
 
 
 ## Features
@@ -26,10 +26,10 @@ Install using your favorite plugin manager. For example, to install using
 Vundle, add this line to your ~/.vimrc:
 
 ```
-Plugin 'jez/vim-better-sml'
+Plugin 'jez/vim-github-hub'
 ```
 
-If you're unfamiliar using Vim plugins, check out [Vim as an IDE][vim-ide] which
+If you're unfamiliar with using Vim plugins, check out [Vim as an IDE][vim-ide] which
 will get you up to speed.
 
 
@@ -46,4 +46,4 @@ leisure.
 Copyright Jake Zimmerman. <jake@zimmerman.io>
 
 [hub]: https://github.com/github/hub
-[vim-as-an-ide]: https://github.com/jez/vim-as-an-ide
+[vim-ide]: https://github.com/jez/vim-as-an-ide
