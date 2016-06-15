@@ -32,6 +32,16 @@ Plugin 'jez/vim-github-hub'
 If you're unfamiliar with using Vim plugins, check out [Vim as an IDE][vim-ide] which
 will get you up to speed.
 
+Independently of installing the plugin, if you'd like to use `%` as the comment
+character with hub, I recommend these aliases:
+
+```shell
+# Markdown pull request with hub
+alias hubmdpr="hub -c core.commentChar='%' pull-request"
+
+# Markdown issue with hub
+alias hubmdis="hub -c core.commentChar='%' issue create"
+```
 
 ## Contributing
 
