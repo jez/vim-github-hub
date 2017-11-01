@@ -7,15 +7,15 @@
 syn case match
 syn sync minlines=50
 
-if has("spell")
+if has('spell')
   syn spell toplevel
 endif
 
 " Try to find the current comment character (not perfect)
 function! s:getCommentChar()
-  let line = getline(search('\v(Creating issue|Requesting a pull)', 'nw'))
-  if strlen(line) > 0
-    return line[0]
+  let l:line = getline(search('\v(Creating issue|Requesting a pull)', 'nw'))
+  if strlen(l:line) > 0
+    return l:line[0]
   endif
 endfunction
 

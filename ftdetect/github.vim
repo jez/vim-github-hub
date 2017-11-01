@@ -4,7 +4,7 @@
 
 " I like using vim-pandoc-syntax for Markdown syntax highlighting, so let's
 " detect if it's installed and fall back to normal markdown if it's not.
-if &runtimepath =~ 'vim-pandoc-syntax'
+if &runtimepath =~# 'vim-pandoc-syntax'
   let s:markdown = 'pandoc'
 else
   let s:markdown = 'markdown'
@@ -13,10 +13,10 @@ end
 " Override the 'gitcommit' filetype that the hub tool sets with a compound
 " markdown + gh(pull|issue) filetype.
 function! s:overrideHubFiletype()
-  if expand("%:t") ==# "PULLREQ_EDITMSG"
-    exe "setlocal filetype=" .s:markdown .".ghpull"
-  elseif expand("%:t") ==# "ISSUE_EDITMSG"
-    exe "setlocal filetype=" .s:markdown .".issue"
+  if expand('%:t') ==# 'PULLREQ_EDITMSG'
+    exe 'setlocal filetype=' .s:markdown .'.ghpull'
+  elseif expand('%:t') ==# 'ISSUE_EDITMSG'
+    exe 'setlocal filetype=' .s:markdown .'.ghissue'
   endif
 endfunction
 
@@ -28,6 +28,6 @@ augroup VimGitHubHubFtDetect
   autocmd FileType gitcommit call s:overrideHubFiletype()
 
   " In case they stop doing what they're currently doing at some point
-  exe "autocmd BufRead,BufNewFile PULLREQ_EDITMSG setlocal filetype=" .s:markdown .".ghpull"
-  exe "autocmd BufRead,BufNewFile ISSUE_EDITMSG setlocal filetype=" .s:markdown .".ghissue"
+  exe 'autocmd BufRead,BufNewFile PULLREQ_EDITMSG setlocal filetype='.s:markdown.'.ghpull'
+  exe 'autocmd BufRead,BufNewFile ISSUE_EDITMSG setlocal filetype='.s:markdown.'.ghissue'
 augroup END
