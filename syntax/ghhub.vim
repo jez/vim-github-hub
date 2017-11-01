@@ -13,7 +13,7 @@ endif
 
 " Try to find the current comment character (not perfect)
 function! s:getCommentChar()
-  let l:line = getline(search('\v(Creating issue|Requesting a pull)', 'nw'))
+  let l:line = getline(search('\v(Creating issue|Creating release|Requesting a pull)', 'nw'))
   if strlen(l:line) > 0
     return l:line[0]
   endif

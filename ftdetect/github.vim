@@ -17,6 +17,8 @@ function! s:overrideHubFiletype()
     exe 'setlocal filetype=' .s:markdown .'.ghpull'
   elseif expand('%:t') ==# 'ISSUE_EDITMSG'
     exe 'setlocal filetype=' .s:markdown .'.ghissue'
+  elseif expand('%:t') ==# 'RELEASE_EDITMSG'
+    exe 'setlocal filetype=' .s:markdown .'.ghrelease'
   endif
 endfunction
 
@@ -30,4 +32,5 @@ augroup VimGitHubHubFtDetect
   " In case they stop doing what they're currently doing at some point
   exe 'autocmd BufRead,BufNewFile PULLREQ_EDITMSG setlocal filetype='.s:markdown.'.ghpull'
   exe 'autocmd BufRead,BufNewFile ISSUE_EDITMSG setlocal filetype='.s:markdown.'.ghissue'
+  exe 'autocmd BufRead,BufNewFile RELEASE_EDITMSG setlocal filetype='.s:markdown.'.ghrelease'
 augroup END
