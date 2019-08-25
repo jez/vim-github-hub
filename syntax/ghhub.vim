@@ -15,25 +15,27 @@ endif
 function! s:getCommentChar()
   let l:line = getline(search('--- >8 ---', 'nw'))
   if strlen(l:line) > 0
-    return l:line[0]
+    return [l:line[0], 'region']
   endif
 
   let l:line = getline(search('\v(Creating issue|Creating release|Requesting a pull)', 'nw'))
   if strlen(l:line) > 0
-    return l:line[0]
+    return [l:line[0], 'line']
   endif
 
-  return '#'
+  return ['#', 'line']
 endfunction
 
-let s:commentChar = s:getCommentChar()
+let [s:commentChar, s:commentKind] = s:getCommentChar()
 
-exe "syn match ghhubComment '" .s:commentChar .".*'"
-exe "syn region ghhubCommentRegion start=/^".s:commentChar." ------------------------ >8 ------------------------/ end=/\\%$/"
+if s:commentKind ==# 'region'
+  exe "syn region ghhubComment start=/^".s:commentChar." ------------------------ >8 ------------------------/ end=/\\%$/"
+else
+  exe "syn match ghhubComment '" .s:commentChar .".*'"
+endif
 
 syn match   ghhubFirstLine '\%^.*' skipnl
 syn match   ghhubTitle     '^.\{0,50\}' contained containedin=ghhubFirstLine contains=@Spell
 
-hi def link ghhubCommentRegion Comment
 hi def link ghhubComment       Comment
 hi def link ghhubTitle         Keyword
