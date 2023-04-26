@@ -2,7 +2,7 @@
 
 > A Vim filetype plugin for [github/hub][hub] :zap:
 
-<img width="837" alt="screenshot 2016-06-10 00 37 07" src="https://cloud.githubusercontent.com/assets/5544532/15957334/4ed0c8b8-2ea3-11e6-8bbc-2d0aec88ad40.png">
+![A screenshot of this plugin in action](vim-github-hub.png)
 
 This plugin does filetype detection and syntax highlighting for buffers/files
 created by [github/hub][hub], a utility for working with Git + GitHub
