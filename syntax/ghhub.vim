@@ -1,8 +1,6 @@
 " Vim syntax file
 "
 " Maintainer: Jake Zimmerman <jake@zimmerman.io
-"
-" TODO(jez): Highlight commit messages the way hub puts them in
 
 syn case match
 syn sync minlines=50
@@ -18,7 +16,23 @@ function! s:getCommentChar()
     return [l:line[0], 'region']
   endif
 
-  let l:line = getline(search('\v(Creating issue|Creating release|Requesting a pull)', 'nw'))
+  let l:issueMatch = 'Creating issue'
+  let l:pullMatch = 'Requesting a pull'
+  let l:commitMatch = 'Please enter the commit message'
+  let l:releaseMatch = 'Creating release'
+
+  let l:line = getline(search(
+    \ '\v(' .
+    \ l:issueMatch .
+    \ '|' .
+    \ l:pullMatch .
+    \ '|' .
+    \ l:commitMatch .
+    \ '|' .
+    \ l:releaseMatch .
+    \ ')'
+    \ , 'nw'))
+
   if strlen(l:line) > 0
     return [l:line[0], 'line']
   endif
