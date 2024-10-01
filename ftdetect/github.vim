@@ -13,12 +13,19 @@ end
 " Override the 'gitcommit' filetype that the hub tool sets with a compound
 " markdown + gh(pull|issue) filetype.
 function! s:overrideHubFiletype()
+  let l:hub_filetype = ''
   if expand('%:t') ==# 'PULLREQ_EDITMSG'
-    exe 'setlocal filetype=' .s:markdown .'.ghpull'
+    let l:hub_filetype = 'ghpull'
   elseif expand('%:t') ==# 'ISSUE_EDITMSG'
-    exe 'setlocal filetype=' .s:markdown .'.ghissue'
+    let l:hub_filetype = 'ghissue'
   elseif expand('%:t') ==# 'RELEASE_EDITMSG'
-    exe 'setlocal filetype=' .s:markdown .'.ghrelease'
+    let l:hub_filetype = 'ghrelease'
+  endif
+
+  if !empty(l:hub_filetype)
+    exe 'setlocal filetype='.s:markdown
+    exe 'setlocal filetype='.l:hub_filetype
+    exe 'setlocal filetype='.s:markdown.'.'.l:hub_filetype
   endif
 endfunction
 
@@ -30,7 +37,6 @@ augroup VimGitHubHubFtDetect
   autocmd FileType gitcommit call s:overrideHubFiletype()
 
   " In case they stop doing what they're currently doing at some point
-  exe 'autocmd BufRead,BufNewFile PULLREQ_EDITMSG setlocal filetype='.s:markdown.'.ghpull'
-  exe 'autocmd BufRead,BufNewFile ISSUE_EDITMSG setlocal filetype='.s:markdown.'.ghissue'
-  exe 'autocmd BufRead,BufNewFile RELEASE_EDITMSG setlocal filetype='.s:markdown.'.ghrelease'
+  " (or, in case the user just opens `.git/PULLREQ_EDITMSG` directly)
+  autocmd BufRead,BufNewFile *_EDITMSG call s:overrideHubFiletype()
 augroup END
